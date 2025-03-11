@@ -9,22 +9,22 @@ using Practicadata.Models;
 
 namespace Practicadata.Controllers
 {
-    public class CategoriasController : Controller
+    public class ClienteController : Controller
     {
         private readonly CatalogosDbContext _context;
 
-        public CategoriasController(CatalogosDbContext context)
+        public ClienteController(CatalogosDbContext context)
         {
             _context = context;
         }
 
-        // GET: Categorias
+        // GET: Cliente
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categorias.ToListAsync());
+            return View(await _context.Clientes.ToListAsync());
         }
 
-        // GET: Categorias/Details/5
+        // GET: Cliente/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace Practicadata.Controllers
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias
+            var cliente = await _context.Clientes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (categoria == null)
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return View(categoria);
+            return View(cliente);
         }
 
-        // GET: Categorias/Create
+        // GET: Cliente/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categorias/Create
+        // POST: Cliente/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Direccion,Telefono,Email")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categoria);
+                _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoria);
+            return View(cliente);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Cliente/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace Practicadata.Controllers
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
             {
                 return NotFound();
             }
-            return View(categoria);
+            return View(cliente);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Cliente/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Direccion,Telefono,Email")] Cliente cliente)
         {
-            if (id != categoria.Id)
+            if (id != cliente.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace Practicadata.Controllers
             {
                 try
                 {
-                    _context.Update(categoria);
+                    _context.Update(cliente);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaExists(categoria.Id))
+                    if (!ClienteExists(cliente.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace Practicadata.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoria);
+            return View(cliente);
         }
 
-        // GET: Categorias/Delete/5
+        // GET: Cliente/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +123,34 @@ namespace Practicadata.Controllers
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias
+            var cliente = await _context.Clientes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (categoria == null)
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return View(categoria);
+            return View(cliente);
         }
 
-        // POST: Categorias/Delete/5
+        // POST: Cliente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria != null)
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente != null)
             {
-                _context.Categorias.Remove(categoria);
+                _context.Clientes.Remove(cliente);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaExists(int id)
+        private bool ClienteExists(int id)
         {
-            return _context.Categorias.Any(e => e.Id == id);
+            return _context.Clientes.Any(e => e.Id == id);
         }
     }
 }

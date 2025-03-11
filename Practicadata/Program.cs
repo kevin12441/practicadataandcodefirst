@@ -11,6 +11,11 @@ builder.Services.AddDbContext<CatalogosDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Conn"));
 });
 
+builder.Services.AddDbContext<CatalogosDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Conn"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

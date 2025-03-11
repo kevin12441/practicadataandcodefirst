@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Practicadata.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                    <form asp-action="Edit" asp-route-id="@item.Id" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form> |
+                    <form asp-action="Details" asp-route-id="@item.Id" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info">Details</button>
+                    </form> |
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Practicadata.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+                <td>
+                    <form asp-action="Edit" method="get" style="display:inline;">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                    <form asp-action="Details" method="get" style="display:inline;">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-info">Details</button>
+                    </form>
+                    <form asp-action="Delete" method="get" style="display:inline;">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
