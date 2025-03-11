@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+
+using practicacode.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<EmpleadoDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Conn"));
+});
+    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
